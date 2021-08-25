@@ -1,0 +1,110 @@
+{
+    "counters": {
+        "u_row": 6,
+        "u_column": 6,
+        "u_content_text": 8,
+        "u_content_image": 2,
+        "u_content_button": 1,
+        "u_content_social": 1,
+        "u_content_html": 1
+    },
+    "body": {
+        "rows": [
+            {
+                "cells": [
+                    1
+                ],
+                "columns": [
+                    {
+                        "contents": [
+                            {
+                                "type": "html",
+                                "values": {
+                                    "html": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<style>\n    /* Remove space around the email design. */\n    html,\n    body {\n        margin: 0 auto !important;\n        padding: 0 !important;\n        height: 100% !important;\n        width: 100% !important;\n        font-size: 11px;\n        font-family: Electrolux Sans Regular;\n    }\n\n    /* Stop Outlook resizing small text. */\n    * {\n        -ms-text-size-adjust: 100%;\n    }\n\n    /* Stop Outlook from adding extra spacing to tables. */\n    table,\n    td {\n        mso-table-lspace: 0pt !important;\n        mso-table-rspace: 0pt !important;\n    }\n\n    /* Use a better rendering method when resizing images in Outlook IE. */\n    img {\n        -ms-interpolation-mode: bicubic;\n    }\n\n    /* Prevent Windows 10 Mail from underlining links. Styles for underlined links should be inline. */\n    a {\n        text-decoration: none;\n        color: black;\n    }\n</style>\n\n<body width=\"100%\" style=\"margin: 0; padding: 0 !important; mso-line-height-rule: exactly;\">\n    <table role=\"presentation\" cellspacing=\"5\" cellpadding=\"5\" width=\"525px\" border=\"0\"\n        style=\"margin: 0 auto; background-color: #ffffff;\">\n        <tr>\n            <td>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"text-align: center;\">\n                    <tr>\n                        <td style=\"text-align: center; padding: 20px;\"><img src=\"https://i.imgur.com/ctmOO2M.png\"\n                                alt=\"company logo\"></td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"text-align: center;\">\n                    <tr>\n                        <td style=\"padding: 10px; font-size: 14px;\">Your Order is On the Way</td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"\n                    style=\"text-align: center; margin: 0 auto;\">\n                    <tr>\n                        <td width=\"36%\"></td>\n                        <td width=\"28%\" style=\"background: #062469; padding: 10px;\"><a href=\"{{customerInteractionUrl}}'\"\n                                style=\"background: #062469; text-decoration:none !important; text-decoration:none; font-weight:400; color: #ffffff;font-size: 9px\">Track\n                                Your Order Here</a></td>\n                        <td width=\"36%\"></td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"text-align: center;\">\n                    <tr>\n                        <td style=\"padding: 10px; text-align: left;\">Dear {{Name}},</td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 10px; text-align: left;\">Your new appliance is on its way! Order Number:\n                            <span style=\"font-weight: bold;\">{{OrderId}}</span>\n                        </td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">\n                    <tr>\n                        <td style=\"text-align: left; padding: 10px;\">\n                            <p style=\"font-weight: bold; text-decoration: underline;\">Delivery Address</p>\n                            <p>{{DeliverAt}}</p>\n                        </td>\n                        <td style=\"text-align: center; padding: 10px;\">\n                            <p style=\"font-weight: bold; text-decoration: underline;\">Contact Person</p>\n                            <p>{{Name}}</p>\n                        </td>\n                        <td style=\"text-align: right; padding: 10px;\">\n                            <p style=\"font-weight: bold; text-decoration: underline;\">Contact Number</p>\n                            <p>{{contactNumber}}</p>\n                        </td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"text-align: left;\">\n                    <tr>\n                        <td style=\"padding: 10px;\">Please anticipate contact from our delivery agent 30min to 1hr prior\n                            to arrival.</td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 10px;\">If you have any questions, please don’t hesitate to contact our\n                            Electrolux Family Store Support:</td>\n                    </tr>\n                </table>\n                <table id=\"contact_div\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"\n                    style=\"text-align: left;\">\n                    <tr>\n                        <td id=\"contact_div_td\" style=\"text-align: left; padding: 10px;\">\n                            <table id=\"contact_table\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"\n                                style=\"text-align: left;\">\n                                <tr>\n                                    <td>Phone: <a href=\"tel: 1-{{env_phone}}\">1-{{env_phone}}</a></td>\n                                </tr>\n                                <tr>\n                                    <td>Email: <a\n                                            href=\"mailto:thefamilystore@electrolux.com\">thefamilystore@electrolux.com</a>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td>Hours of operation: Monday-Friday, 8:00am - 5:30pm EST</td>\n                                </tr>\n                            </table>\n                        </td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"text-align: center;\">\n                    <tr>\n                        <td style=\"padding: 10px; text-align: left;\">\n                            <p style=\"margin-bottom: 0px;\">Thank You,</p>\n                            <p style=\"margin-top: 5px;\">Electrolux Home Delivery Team</p>\n                        </td>\n                    </tr>\n                </table>\n                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"text-align: center;\">\n                    <tr>\n                        <td>\n                            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\"\n                                style=\"text-align: center; margin: 0 auto;\">\n                                <tr>\n                                    <td style=\"padding: 10px; text-align: center;\"><a href=\"{{facebook}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold;\"><img\n                                                src=\"https://i.imgur.com/R6DoCws.png\" alt=\"facebook logo\" width=\"20\"\n                                                height=\"20\"></a></td>\n                                    <td style=\"padding: 10px; text-align: center;\"><a href=\"{{instagram}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold;\"><img\n                                                src=\"https://i.imgur.com/ZKFPWiF.png\" alt=\"instagram logo\" width=\"30\"\n                                                height=\"20\"></a></td>\n                                    <td style=\"padding: 10px; text-align: center;\"><a href=\"{{youtube}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold;\"><img\n                                                src=\"https://i.imgur.com/tU41IdY.png\" alt=\"youtube logo\" width=\"20\"\n                                                height=\"20\"></a></td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\"\n                                style=\"text-align: center; margin: 0 auto;\">\n                                <tr>\n                                    <td style=\"padding: 0px 20px; text-align: left; border-right: 2px solid #000000;\"><a\n                                            href=\"{{env_del_link}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold; \">Delivery\n                                            & Installation</a></td>\n                                    <td style=\"padding: 0px 20px; text-align: left;\"><a href=\"{{env_return_policy}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold;\">Return\n                                            Policy</a></td>\n                                </tr>\n                            </table><br>\n                            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\"\n                                style=\"text-align: center; margin: 0 auto;\">\n                                <tr>\n                                    <td style=\"padding: 0px 20px; text-align: left; border-right: 2px solid #000000;\"><a\n                                            href=\"{{env_t_c}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold; \">Terms\n                                            & Conditions</a></td>\n                                    <td style=\"padding: 0px 20px; text-align: left; border-right: 2px solid #000000;\"><a\n                                            href=\"{{env_privacy_policy}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold; \">Privacy\n                                            Policy</a></td>\n                                    <td style=\"padding: 0px 20px; text-align: left;\"><a href=\"{{env_contact_us}}\"\n                                            style=\"text-decoration:none !important; text-decoration:none; font-weight: bold;\">Contact\n                                            Us</a></td>\n                                </tr>\n                            </table><br>\n                            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\"\n                                style=\"text-align: center; margin: 0 auto;\">\n                                <tr>\n                                    <td style=\"padding: 10px; text-align: center\">@ {{year}} Electrolux</td>\n                                </tr>\n                            </table>\n                        </td>\n                    </tr>\n                </table>\n            </td>\n        </tr>\n    </table>\n</body>\n\n</html>",
+                                    "hideDesktop": false,
+                                    "containerPadding": "10px",
+                                    "_meta": {
+                                        "htmlID": "u_content_html_1",
+                                        "htmlClassNames": "u_content_html"
+                                    },
+                                    "selectable": true,
+                                    "draggable": true,
+                                    "duplicatable": true,
+                                    "deletable": true,
+                                    "hideable": true
+                                }
+                            }
+                        ],
+                        "values": {
+                            "_meta": {
+                                "htmlID": "u_column_4",
+                                "htmlClassNames": "u_column"
+                            },
+                            "border": {},
+                            "padding": "0px",
+                            "backgroundColor": ""
+                        }
+                    }
+                ],
+                "values": {
+                    "displayCondition": null,
+                    "columns": false,
+                    "backgroundColor": "",
+                    "columnsBackgroundColor": "#ffffff",
+                    "backgroundImage": {
+                        "url": "",
+                        "fullWidth": true,
+                        "repeat": false,
+                        "center": true,
+                        "cover": false
+                    },
+                    "padding": "0px",
+                    "hideDesktop": false,
+                    "_meta": {
+                        "htmlID": "u_row_4",
+                        "htmlClassNames": "u_row"
+                    },
+                    "selectable": true,
+                    "draggable": true,
+                    "duplicatable": true,
+                    "deletable": true,
+                    "hideable": true,
+                    "hideMobile": false,
+                    "noStackMobile": false
+                }
+            }
+        ],
+        "values": {
+            "textColor": "#000000",
+            "backgroundColor": "#f9f9f9",
+            "backgroundImage": {
+                "url": "",
+                "fullWidth": true,
+                "repeat": false,
+                "center": true,
+                "cover": false
+            },
+            "contentWidth": "600px",
+            "contentAlign": "center",
+            "fontFamily": {
+                "label": "Cabin",
+                "value": "'Cabin',sans-serif",
+                "url": "https://fonts.googleapis.com/css?family=Cabin:400,700",
+                "defaultFont": true
+            },
+            "preheaderText": "",
+            "linkStyle": {
+                "body": true,
+                "linkColor": "#0000ee",
+                "linkHoverColor": "#0000ee",
+                "linkUnderline": true,
+                "linkHoverUnderline": true
+            },
+            "_meta": {
+                "htmlID": "u_body",
+                "htmlClassNames": "u_body"
+            }
+        }
+    },
+    "schemaVersion": 6
+}

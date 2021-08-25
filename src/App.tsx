@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 import EmailEditor, { SimpleMergeTag, UnlayerOptions } from 'react-email-editor';
 import sampleTemplate from './sample.json';
+import legacyTemplate from './legacyTemplate.json';
+const fs = require('fs');
+const promisify = require('util').promisify;
+
 
 const Container = styled.div`
   display: flex;
@@ -50,9 +54,33 @@ function App() {
     });
   };
 
+  const loadLegacy1 = (): void => {
+    console.log('loading Legacy template');
+    setTimeout(() => {
+      emailEditorRef.current.editor.loadDesign(legacyTemplate);
+      console.log('Legacy template loaded');
+    }, 4000)
+  }
+  const loadLegacyHTML = (): void => {
+    console.log('loading Legacy template');
+    fetch('./legacyEmail.html')
+      .then(r => r.text())
+      .then((html) => {
+        // html variable has the text of the html file as a string
+        setTimeout(() => {
+        emailEditorRef.current.editor.loadDesign({ html: '<div>This is a legacy HTML template.</div>', classic: true });
+        console.log('Legacy template loaded');
+      }, 4000)})
+
+
+  }
+  const loadLegacy = (): void => {
+    // TODO: Test legacy template
+    loadLegacyHTML();
+    // loadLegacy1();
+  }
+
   const onLoad = (): void => {
-    // you can load your template here;
-    // const templateJson = {};
     console.log('Loading editor');
     setTimeout(() => {
       emailEditorRef.current.editor.loadDesign(sampleTemplate);
@@ -61,17 +89,17 @@ function App() {
   };
 
   const saveDesign = (): void => {
-    // @ts-ignore: Object is possibly 'null'.
     emailEditorRef.current.editor.exportHtml((data: TemplateData) => {
       console.log(data);
     });
   }
 
   const sendTestMail = (body: string): void => {
+    const subject = "Test Mail1";
     let firstName = 'Piyush';
     let lastName = 'Chauhan';
     let OrderedBy = 'Testing Order';
-    body = body.replaceAll("{{firstname}}", firstName);
+    body = body.replaceAll("{{Name}}", firstName);
     body = body.replaceAll("{{last_name}}", lastName);
     body = body.replaceAll("{{Ordered By}}", OrderedBy);
 
@@ -84,7 +112,7 @@ function App() {
         "from_email_id": "piyush.chauhan@getfareye.com",
         "kafkaKey": "string",
         "name": "string",
-        "subject": "My Subject1",
+        "subject": subject,
         "template_id": 0,
         "to_email_ids": [
           "pi.codemonk@gmail.com",
@@ -112,6 +140,7 @@ function App() {
   }
 
   const sentHTML_mail = () => {
+    console.log('Sending HTML mail ')
     emailEditorRef.current.editor.exportHtml((data: TemplateData) => {
       const { design, html } = data;
       sendTestMail(html);
@@ -121,26 +150,39 @@ function App() {
       }
     });
   }
+
   const height = window.innerHeight;
-  const mergeTags: Array<SimpleMergeTag> = [
-    { name: "lastname", value: "{{lastname}}" },
-    { name: "order_no", value: "{{order_number}}" }
-  ];
-  const mergeTagsSet2: Array<SimpleMergeTag> = [
-    { name: "merge_tag1", value: "{{merge_tag1}}" },
-    { name: "merge_tag2", value: "{{merge_tag2}}" }
-  ];
-  const options: UnlayerOptions = {
-    mergeTags: mergeTagsSet2, 
-    // mergeTagsSet: mergeTagsSet2
+
+  const optionSet1: UnlayerOptions = {
+    mergeTags: [
+      { name: "lastname", value: "{{lastname}}" },
+      { name: "order_no", value: "{{order_number}}" },
+    ],
+    designTags: {
+      business_name: "Electrolux",
+      current_user_name: "Electrolux_User"
+    }
   };
+  const optionSet2: UnlayerOptions = {
+    mergeTags: [
+      { name: "merge_tag1", value: "{{merge_tag1}}" },
+      { name: "merge_tag2", value: "{{merge_tag2}}" }
+    ],
+    designTags: {
+      business_name: "Metro",
+      current_user_name: "Metro_User"
+    }
+  };
+  const options: UnlayerOptions = optionSet2;
+
 
   return (
     <div className="App">
       <Container>
         <Bar>
           <h1>React Email Editor (Demo)</h1>
-          <button onClick={onLoad}>Load Template</button>
+          <button onClick={loadLegacy}>Load Legacy</button>
+          <button onClick={onLoad}>Load Sample Template</button>
           <button onClick={saveDesign}>Save Design</button>
           <button onClick={exportHtml}>Export HTML</button>
           <button onClick={sentHTML_mail}>Send Test Mail</button>
