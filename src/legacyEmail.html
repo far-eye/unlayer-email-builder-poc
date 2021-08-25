@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Remove space around the email design. */
+    html,
+    body {
+        margin: 0 auto !important;
+        padding: 0 !important;
+        height: 100% !important;
+        width: 100% !important;
+        font-size: 11px;
+        font-family: Electrolux Sans Regular;
+    }
+
+    /* Stop Outlook resizing small text. */
+    * {
+        -ms-text-size-adjust: 100%;
+    }
+
+    /* Stop Outlook from adding extra spacing to tables. */
+    table,
+    td {
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+    }
+
+    /* Use a better rendering method when resizing images in Outlook IE. */
+    img {
+        -ms-interpolation-mode: bicubic;
+    }
+
+    /* Prevent Windows 10 Mail from underlining links. Styles for underlined links should be inline. */
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly;">
+    <table role="presentation" cellspacing="5" cellpadding="5" width="525px" border="0"
+        style="margin: 0 auto; background-color: #ffffff;">
+        <tr>
+            <td>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%" style="text-align: center;">
+                    <tr>
+                        <td style="text-align: center; padding: 20px;"><img src="https://i.imgur.com/ctmOO2M.png"
+                                alt="company logo"></td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%" style="text-align: center;">
+                    <tr>
+                        <td style="padding: 10px; font-size: 14px;">Your Order is On the Way</td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%"
+                    style="text-align: center; margin: 0 auto;">
+                    <tr>
+                        <td width="36%"></td>
+                        <td width="28%" style="background: #062469; padding: 10px;"><a href="{{customerInteractionUrl}}'"
+                                style="background: #062469; text-decoration:none !important; text-decoration:none; font-weight:400; color: #ffffff;font-size: 9px">Track
+                                Your Order Here</a></td>
+                        <td width="36%"></td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%" style="text-align: center;">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">Dear {{Name}}',</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">Your new appliance is on its way! Order Number:
+                            <span style="font-weight: bold;">{{OrderId}}</span>
+                        </td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                        <td style="text-align: left; padding: 10px;">
+                            <p style="font-weight: bold; text-decoration: underline;">Delivery Address</p>
+                            <p>{{DeliverAt}}</p>
+                        </td>
+                        <td style="text-align: center; padding: 10px;">
+                            <p style="font-weight: bold; text-decoration: underline;">Contact Person</p>
+                            <p>{{Name}}</p>
+                        </td>
+                        <td style="text-align: right; padding: 10px;">
+                            <p style="font-weight: bold; text-decoration: underline;">Contact Number</p>
+                            <p>{{contactNumber}}</p>
+                        </td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%" style="text-align: left;">
+                    <tr>
+                        <td style="padding: 10px;">Please anticipate contact from our delivery agent 30min to 1hr prior
+                            to arrival.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">If you have any questions, please don’t hesitate to contact our
+                            Electrolux Family Store Support:</td>
+                    </tr>
+                </table>
+                <table id="contact_div" role="presentation" cellspacing="0" cellpadding="0" width="100%"
+                    style="text-align: left;">
+                    <tr>
+                        <td id="contact_div_td" style="text-align: left; padding: 10px;">
+                            <table id="contact_table" role="presentation" cellspacing="0" cellpadding="0" width="100%"
+                                style="text-align: left;">
+                                <tr>
+                                    <td>Phone: <a href="tel: 1-{{env_phone}}">1-{{env_phone}}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Email: <a
+                                            href="mailto:thefamilystore@electrolux.com">thefamilystore@electrolux.com</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Hours of operation: Monday-Friday, 8:00am - 5:30pm EST</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%" style="text-align: center;">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <p style="margin-bottom: 0px;">Thank You,</p>
+                            <p style="margin-top: 5px;">Electrolux Home Delivery Team</p>
+                        </td>
+                    </tr>
+                </table>
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%" style="text-align: center;">
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0"
+                                style="text-align: center; margin: 0 auto;">
+                                <tr>
+                                    <td style="padding: 10px; text-align: center;"><a href="{{facebook}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold;"><img
+                                                src="https://i.imgur.com/R6DoCws.png" alt="facebook logo" width="20"
+                                                height="20"></a></td>
+                                    <td style="padding: 10px; text-align: center;"><a href="{{instagram}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold;"><img
+                                                src="https://i.imgur.com/ZKFPWiF.png" alt="instagram logo" width="30"
+                                                height="20"></a></td>
+                                    <td style="padding: 10px; text-align: center;"><a href="{{youtube}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold;"><img
+                                                src="https://i.imgur.com/tU41IdY.png" alt="youtube logo" width="20"
+                                                height="20"></a></td>
+                                </tr>
+                            </table>
+                            <table role="presentation" cellspacing="0" cellpadding="0"
+                                style="text-align: center; margin: 0 auto;">
+                                <tr>
+                                    <td style="padding: 0px 20px; text-align: left; border-right: 2px solid #000000;"><a
+                                            href="{{env_del_link}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold; ">Delivery
+                                            & Installation</a></td>
+                                    <td style="padding: 0px 20px; text-align: left;"><a href="{{env_return_policy}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold;">Return
+                                            Policy</a></td>
+                                </tr>
+                            </table><br>
+                            <table role="presentation" cellspacing="0" cellpadding="0"
+                                style="text-align: center; margin: 0 auto;">
+                                <tr>
+                                    <td style="padding: 0px 20px; text-align: left; border-right: 2px solid #000000;"><a
+                                            href="{{env_t_c}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold; ">Terms
+                                            & Conditions</a></td>
+                                    <td style="padding: 0px 20px; text-align: left; border-right: 2px solid #000000;"><a
+                                            href="{{env_privacy_policy}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold; ">Privacy
+                                            Policy</a></td>
+                                    <td style="padding: 0px 20px; text-align: left;"><a href="{{env_contact_us}}"
+                                            style="text-decoration:none !important; text-decoration:none; font-weight: bold;">Contact
+                                            Us</a></td>
+                                </tr>
+                            </table><br>
+                            <table role="presentation" cellspacing="0" cellpadding="0"
+                                style="text-align: center; margin: 0 auto;">
+                                <tr>
+                                    <td style="padding: 10px; text-align: center">@ {{year}} Electrolux</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
