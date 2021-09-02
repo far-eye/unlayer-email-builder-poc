@@ -1,12 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import EmailEditor, { SimpleMergeTag, UnlayerOptions } from 'react-email-editor';
 import sampleTemplate from './sample.json';
 import legacyTemplate from './legacyTemplate.json';
-const fs = require('fs');
-const promisify = require('util').promisify;
-
 
 const Container = styled.div`
   display: flex;
@@ -44,7 +41,7 @@ const Bar = styled.div`
 interface TemplateData { design: any, html: string }
 
 function App() {
-
+  const [count, setCount] = useState(0);
   const emailEditorRef = useRef(null);
 
   const exportHtml = (): void => {
@@ -68,16 +65,17 @@ function App() {
       .then((html) => {
         // html variable has the text of the html file as a string
         setTimeout(() => {
-        emailEditorRef.current.editor.loadDesign({ html: '<div>This is a legacy HTML template.</div>', classic: true });
-        console.log('Legacy template loaded');
-      }, 4000)})
+          emailEditorRef.current.editor.loadDesign({ html: '<div>This is a legacy HTML template.</div>', classic: true });
+          console.log('Legacy template loaded');
+        }, 4000)
+      })
 
 
   }
   const loadLegacy = (): void => {
     // TODO: Test legacy template
-    loadLegacyHTML();
-    // loadLegacy1();
+    // loadLegacyHTML();
+    loadLegacy1();
   }
 
   const onLoad = (): void => {
@@ -95,13 +93,25 @@ function App() {
   }
 
   const sendTestMail = (body: string): void => {
-    const subject = "Test Mail1";
-    let firstName = 'Piyush';
-    let lastName = 'Chauhan';
+    const subject = "Test Mail " + count.toString();
     let OrderedBy = 'Testing Order';
-    body = body.replaceAll("{{Name}}", firstName);
-    body = body.replaceAll("{{last_name}}", lastName);
-    body = body.replaceAll("{{Ordered By}}", OrderedBy);
+
+    let mergeTagValues: { name: string; value: string }[] = [
+      { name: "{{Name}}", value: 'Piyush' },
+      { name: "{{myLink}}", value: 'https://www.google.com' },
+      { name: "{{last_name}}", value: 'Chauhan' },
+      { name: "{{imgMergeTag}}", value: 'https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png' },
+      { name: "{{imgMergeTag1}}", value: 'https://examples.unlayer.com/static/a54bca2a446e76ad190e0072325807f8/46991/logo.png' },
+    ];
+    for (let i = 0; i < mergeTagValues.length; i++) {
+      if (body.search(mergeTagValues[i].name)) {
+        let newBody = body.replaceAll(mergeTagValues[i].name, mergeTagValues[i].value);
+        if (newBody === body) { } else {
+          body = newBody;
+          console.log(mergeTagValues[i].name + ' replaced with ' + mergeTagValues[i].value);
+        }
+      }
+    }
 
     var myHeaders = new Headers();
     myHeaders.append("client", "TEST");
@@ -115,7 +125,7 @@ function App() {
         "subject": subject,
         "template_id": 0,
         "to_email_ids": [
-          "pi.codemonk@gmail.com",
+          "piyush.chauhan@getfareye.com",
           // "awadesh.kumar@getfareye.com",
           // "nandita.srivastava@getfareye.com"
         ]
@@ -140,6 +150,7 @@ function App() {
   }
 
   const sentHTML_mail = () => {
+    setCount(count + 1);
     console.log('Sending HTML mail ')
     emailEditorRef.current.editor.exportHtml((data: TemplateData) => {
       const { design, html } = data;
@@ -161,7 +172,8 @@ function App() {
     designTags: {
       business_name: "Electrolux",
       current_user_name: "Electrolux_User"
-    }
+    },
+
   };
   const optionSet2: UnlayerOptions = {
     mergeTags: [
@@ -174,7 +186,8 @@ function App() {
     }
   };
   const options: UnlayerOptions = optionSet2;
-
+  let customJS:string;
+  fetch('custom.js').then((response) =>response.text()).then((responseText) => customJS = responseText);
 
   return (
     <div className="App">
@@ -188,7 +201,59 @@ function App() {
           <button onClick={sentHTML_mail}>Send Test Mail</button>
         </Bar>
         <React.StrictMode>
-          <EmailEditor ref={emailEditorRef} onLoad={onLoad} projectId={31147} minHeight={height - 60} options={options} />
+          <EmailEditor
+            ref={emailEditorRef}
+            onLoad={onLoad}
+            projectId={31930}
+            minHeight={height - 60}
+            options={{
+              ...options,
+              customJS: [
+                // 'https://examples.unlayer.com/examples/custom-tool-data/custom.js',
+                `console.log('cusomt js');
+                unlayer.registerTool({
+                  name: 'my_tool',
+                  label: 'Logo Image',
+                  icon: 'fa-smile',
+                  supportedDisplayModes: ['web', 'email'],
+                  options: {},
+                  values: {},
+                  renderer: {
+                    Viewer: unlayer.createViewer({
+                      render(values) {
+                        console.log('Values in viewer', values);
+                        return "<img src='https://cdn.tools.unlayer.com/image/placeholder.png'>"
+                      }
+                    }),
+                    exporters: {
+                      web: function (values) {
+                        console.log('Values in web exporter', values);
+                        return "<img src='https://cdn.tools.unlayer.com/image/placeholder.png'>"
+                      },
+                      email: function (values) {
+                        console.log('Values in email exporter', values);
+                        return "<img src='{{imgMergeTag}}' height='100px' width='100px' />"
+                      }
+                    },
+                    head: {
+                      css: function (values) { },
+                      js: function (values) { console.log('Values in head js', values); }
+                    }
+                  }
+                });
+                
+                `
+              ],
+              tools:{
+                "custom#my_tool": {
+                  data: {
+                    name: 'John Doe',
+                    age: '27',
+                    photo: 'https://picsum.photos/id/1005/200',
+                  },
+                },
+              }
+            }} />
         </React.StrictMode>
       </Container>
     </div>
