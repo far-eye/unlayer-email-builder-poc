@@ -20,7 +20,7 @@ unlayer.registerTool({
       },
       email: function (values) {
         console.log('Values in email exporter', values);
-        return "<img src='{{imgMergeTag}}'>"
+        return "<img src='{{imgMergeTag}}' height='100px' width>"
       }
     },
     head: {

@@ -23,6 +23,7 @@
   },
   "include": [
     "src",
-    "src/*.js"
+    "src/*.js",
+    "public/custom.js"
   ]
 }

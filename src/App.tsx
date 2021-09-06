@@ -65,7 +65,7 @@ function App() {
       .then((html) => {
         // html variable has the text of the html file as a string
         setTimeout(() => {
-          emailEditorRef.current.editor.loadDesign({ html: '<div>This is a legacy HTML template.</div>', classic: true });
+          emailEditorRef.current.editor.loadDesign({ html: html, classic: true });
           console.log('Legacy template loaded');
         }, 4000)
       })
@@ -74,8 +74,8 @@ function App() {
   }
   const loadLegacy = (): void => {
     // TODO: Test legacy template
-    // loadLegacyHTML();
-    loadLegacy1();
+    loadLegacyHTML();
+    // loadLegacy1();
   }
 
   const onLoad = (): void => {
@@ -96,13 +96,19 @@ function App() {
     const subject = "Test Mail " + count.toString();
     let OrderedBy = 'Testing Order';
 
-    let mergeTagValues: { name: string; value: string }[] = [
-      { name: "{{Name}}", value: 'Piyush' },
-      { name: "{{myLink}}", value: 'https://www.google.com' },
+    let mergeTagValues1: { name: string; value: string }[] = [
+      { name: "{{firstname}}", value: 'Piyush' },
       { name: "{{last_name}}", value: 'Chauhan' },
-      { name: "{{imgMergeTag}}", value: 'https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png' },
-      { name: "{{imgMergeTag1}}", value: 'https://examples.unlayer.com/static/a54bca2a446e76ad190e0072325807f8/46991/logo.png' },
+      { name: "{{link}}", value: 'https://www.google.com' },
+      { name: "{{logo}}", value: 'https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png' },
     ];
+    let mergeTagValues2: { name: string; value: string }[] = [
+      { name: "{{firstname}}", value: 'Awadesh' },
+      { name: "{{last_name}}", value: 'Kumar' },
+      { name: "{{link}}", value: 'https://www.duckduckgo.com' },
+      { name: "{{logo}}", value: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png' },
+    ];
+    let mergeTagValues = mergeTagValues2;
     for (let i = 0; i < mergeTagValues.length; i++) {
       if (body.search(mergeTagValues[i].name)) {
         let newBody = body.replaceAll(mergeTagValues[i].name, mergeTagValues[i].value);
@@ -208,51 +214,8 @@ function App() {
             minHeight={height - 60}
             options={{
               ...options,
-              customJS: [
-                // 'https://examples.unlayer.com/examples/custom-tool-data/custom.js',
-                `console.log('cusomt js');
-                unlayer.registerTool({
-                  name: 'my_tool',
-                  label: 'Logo Image',
-                  icon: 'fa-smile',
-                  supportedDisplayModes: ['web', 'email'],
-                  options: {},
-                  values: {},
-                  renderer: {
-                    Viewer: unlayer.createViewer({
-                      render(values) {
-                        console.log('Values in viewer', values);
-                        return "<img src='https://cdn.tools.unlayer.com/image/placeholder.png'>"
-                      }
-                    }),
-                    exporters: {
-                      web: function (values) {
-                        console.log('Values in web exporter', values);
-                        return "<img src='https://cdn.tools.unlayer.com/image/placeholder.png'>"
-                      },
-                      email: function (values) {
-                        console.log('Values in email exporter', values);
-                        return "<img src='{{imgMergeTag}}' height='100px' width='100px' />"
-                      }
-                    },
-                    head: {
-                      css: function (values) { },
-                      js: function (values) { console.log('Values in head js', values); }
-                    }
-                  }
-                });
-                
-                `
-              ],
-              tools:{
-                "custom#my_tool": {
-                  data: {
-                    name: 'John Doe',
-                    age: '27',
-                    photo: 'https://picsum.photos/id/1005/200',
-                  },
-                },
-              }
+              
+              
             }} />
         </React.StrictMode>
       </Container>
